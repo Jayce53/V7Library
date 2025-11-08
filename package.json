@@ -1,0 +1,52 @@
+{
+  "name": "@fooderific/v7-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "imports": {
+    "#v7/*.js": {
+      "types": "./src/*.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "test": "vitest run",
+    "lint": "eslint \"{src,tests}/**/*.ts\"",
+    "docs": "typedoc",
+    "test:integration": "cross-env VITEST_MODE=integration vitest run"
+  },
+  "peerDependencies": {
+    "memcached": "^2.2.2",
+    "mysql2": "^3.11.3"
+  },
+  "devDependencies": {
+    "@testcontainers/mysql": "^11.8.0",
+    "@types/memcached": "^2.2.7",
+    "@types/node": "^22.9.0",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.29.1",
+    "memcached": "^2.2.2",
+    "mysql2": "^3.11.3",
+    "testcontainers": "^11.8.0",
+    "typedoc": "^0.26.6",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}

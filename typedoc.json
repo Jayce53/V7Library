@@ -1,0 +1,15 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "tsconfig": "tsconfig.docs.json",
+  "entryPoints": ["src/index.ts"],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "cleanOutputDir": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": false,
+  "validation": {
+    "notExported": false,
+    "notDocumented": false
+  }
+}

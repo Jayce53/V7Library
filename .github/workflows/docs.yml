@@ -1,0 +1,32 @@
+name: Publish Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'typedoc.json'
+      - 'tsconfig.docs.json'
+      - 'package.json'
+      - 'yarn.lock'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn docs
+
+      - run: npx netlify deploy --prod --dir=docs --site=$NETLIFY_PROJECT_ID
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_PROJECT_ID: ${{ secrets.NETLIFY_PROJECT_ID }}

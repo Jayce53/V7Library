@@ -1,5 +1,6 @@
 /**
  * Minimal structured logging facade with pluggable transports.
+ *
  */
 type LogLevel = "debug" | "info" | "warn" | "error";
 

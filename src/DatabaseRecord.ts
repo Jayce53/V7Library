@@ -90,6 +90,9 @@ export abstract class DatabaseRecord<TRecord extends Record<string, any>> {
   /**
    * Entry point to construct and hydrate a record.
    */
+  /**
+   * Loads (and optionally caches) a record for the provided key values.
+   */
   static async load<TRecord extends Record<string, any>, TInstance extends DatabaseRecord<TRecord>>(
     this: DatabaseRecordConstructor<TRecord, TInstance>,
     keyValues: KeyValues,
@@ -104,6 +107,9 @@ export abstract class DatabaseRecord<TRecord extends Record<string, any>> {
   /**
    * Convenience helper to construct raw SQL expressions used in insert/update.
    */
+  /**
+    * Wraps a literal SQL fragment with parameter bindings for insert/update calls.
+    */
   static literal(sql: string, params: unknown[] = []): SqlExpression {
     return {sql, params};
   }
@@ -194,6 +200,9 @@ export abstract class DatabaseRecord<TRecord extends Record<string, any>> {
   /**
    * Inserts a new record, caches it, and returns the hydrated instance.
    */
+  /**
+   * Inserts a new row (and optional extra row) returning the hydrated record.
+   */
   static async insert<TRecord extends Record<string, any>, TInstance extends DatabaseRecord<TRecord>>(
     this: DatabaseRecordConstructor<TRecord, TInstance> & typeof DatabaseRecord,
     data: Record<string, ColumnValue>,
@@ -250,6 +259,9 @@ export abstract class DatabaseRecord<TRecord extends Record<string, any>> {
   /**
    * Clears metadata cache for the subclass.
    */
+  /**
+   * Clears cached table metadata for all record types.
+   */
   static async clearMetaCache(): Promise<void> {
     if (!Cache.isEnabled()) {
       return;
@@ -266,6 +278,9 @@ export abstract class DatabaseRecord<TRecord extends Record<string, any>> {
   /**
    * Clears process-local metadata and dependency caches (primarily for tests).
    */
+  /**
+   * Resets cached metadata for deterministic tests.
+   */
   static resetMetadataForTests(): void {
     this.metadata = null;
     this.dependencies = undefined;
@@ -273,6 +288,9 @@ export abstract class DatabaseRecord<TRecord extends Record<string, any>> {
 
   /**
    * Determines if the record currently exists in cache.
+   */
+  /**
+   * Checks whether a record exists in cache for the provided keys.
    */
   static async isInCache(keyValues: KeyValues): Promise<boolean> {
     if (!Cache.isEnabled()) {

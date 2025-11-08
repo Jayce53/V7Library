@@ -1,5 +1,8 @@
 type LogLevel = "debug" | "info" | "warn" | "error";
 
+/**
+ * Structured log entry passed to transports.
+ */
 export interface LogEntry {
   level: LogLevel;
   context: string;
@@ -8,6 +11,9 @@ export interface LogEntry {
   timestamp: Date;
 }
 
+/**
+ * Function invoked for each log entry.
+ */
 export type LogTransport = (entry: LogEntry) => void;
 
 const defaultTransport: LogTransport = (entry) => {
@@ -38,27 +44,45 @@ const defaultTransport: LogTransport = (entry) => {
 /**
  * Lightweight logger facade that can be swapped for a real backend later.
  */
+/**
+ * Simple structured logger with pluggable transport.
+ */
 export class Logger {
   private static transport: LogTransport = defaultTransport;
 
   constructor(private readonly context: string) {}
 
+  /**
+   * Overrides the transport function.
+   */
   static setTransport(transport: LogTransport): void {
     this.transport = transport;
   }
 
+  /**
+   * Logs a debug entry.
+   */
   debug(message: string, metadata?: unknown): void {
     this.log("debug", message, metadata);
   }
 
+  /**
+   * Logs an informational entry.
+   */
   info(message: string, metadata?: unknown): void {
     this.log("info", message, metadata);
   }
 
+  /**
+   * Logs a warning entry.
+   */
   warn(message: string, metadata?: unknown): void {
     this.log("warn", message, metadata);
   }
 
+  /**
+   * Logs an error entry.
+   */
   error(message: string, metadata?: unknown): void {
     this.log("error", message, metadata);
   }

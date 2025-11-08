@@ -14,12 +14,18 @@ import Configuration from "#v7/Configuration.js";
  * Wrapping mysql2's pool creation lets us centralise configuration and makes
  * the pool replaceable in unit tests.
  */
+/**
+ * Provides a lazily-created shared MySQL connection pool.
+ */
 export default class DatabasePool {
   private static pool: Pool | null = null;
 
   /**
    * Lazily creates (or returns) the shared connection pool using configuration
    * values.
+   */
+  /**
+   * Returns the singleton pool, creating it on demand.
    */
   static getPool(): Pool {
     if (!this.pool) {
@@ -44,10 +50,18 @@ export default class DatabasePool {
   /**
    * Allows tests to inject a custom pool (or reset the singleton).
    */
+  /**
+   * Overrides the current pool (used mainly by tests).
+   */
   static setPool(pool: Pool | null): void {
     this.pool = pool;
   }
 
+  /**
+   * Executes a query returning rows and field metadata.
+   * @param sql SQL statement with optional placeholders.
+   * @param params Parameter values for the placeholders.
+   */
   static async query<T extends RowDataPacket[] | ResultSetHeader>(
     sql: string,
     params: unknown[] = [],
@@ -56,6 +70,9 @@ export default class DatabasePool {
     return pool.query<T>(sql, params);
   }
 
+  /**
+   * Executes a modifying statement and returns the affected row metadata.
+   */
   static async execute(
     sql: string,
     params: unknown[] = [],
@@ -65,6 +82,9 @@ export default class DatabasePool {
     return result;
   }
 
+  /**
+   * Fetches at most one row from the database, returning null when no rows match.
+   */
   static async fetchOne<T extends RowDataPacket>(
     sql: string,
     params: unknown[] = [],

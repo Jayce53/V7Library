@@ -1,3 +1,6 @@
+/**
+ * Lightweight shared event bus for cache invalidation and domain events.
+ */
 import {EventEmitter} from "events";
 
 /**

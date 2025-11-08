@@ -1,3 +1,6 @@
+/**
+ * Base configuration values shared by Fooderific services.
+ */
 import type {DatabaseConfig, MemcachedServer} from "#v7/types/config.js";
 
 /**

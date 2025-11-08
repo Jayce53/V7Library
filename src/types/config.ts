@@ -1,3 +1,6 @@
+/**
+ * Shared configuration type definitions used throughout the library.
+ */
 export interface DatabaseConfig {
   host: string;
   port: number;

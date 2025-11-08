@@ -1,3 +1,6 @@
+/**
+ * Rich Active Record style abstraction around MySQL rows with Memcached backing.
+ */
 import type {ResultSetHeader, RowDataPacket} from "mysql2/promise";
 import {Cache} from "#v7/Cache.js";
 import Configuration from "#v7/Configuration.js";

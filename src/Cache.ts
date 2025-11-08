@@ -1,3 +1,6 @@
+/**
+ * Promise-based wrapper around Memcached with singleton management.
+ */
 import Memcached from "memcached";
 import Configuration from "#v7/Configuration.js";
 import type {MemcachedServer} from "#v7/types/config.js";

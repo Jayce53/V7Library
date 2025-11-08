@@ -1,3 +1,6 @@
+/**
+ * Type helpers describing table metadata, dependencies, and SQL payloads.
+ */
 export type KeyValues = Record<string, string | number | bigint>;
 
 export interface DatabaseRecordOptions {

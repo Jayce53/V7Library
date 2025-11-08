@@ -1,3 +1,6 @@
+/**
+ * Shared MySQL connection pool utilities built on mysql2.
+ */
 import {
   createPool,
   type FieldPacket,

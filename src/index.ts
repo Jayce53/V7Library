@@ -1,3 +1,6 @@
+/**
+ * Entry point re-exporting all public modules and types.
+ */
 export {Cache} from "./Cache.js";
 export {default as Configuration} from "./Configuration.js";
 export {default as ConfigurationBase} from "./ConfigurationBase.js";

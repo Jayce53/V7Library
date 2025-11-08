@@ -1,3 +1,6 @@
+/**
+ * Project-specific configuration values overriding the shared defaults.
+ */
 import ConfigurationBase from "#v7/ConfigurationBase.js";
 
 /**
